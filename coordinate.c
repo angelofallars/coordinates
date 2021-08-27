@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#define clear() printf("\033[H\033[J")
+
 typedef struct point {
 	int x;
 	int y;
@@ -18,6 +20,8 @@ int main(int argc, char* argv[])
 	scanf("%i", &dot.y);
 	
 	// Plot the point	
+	clear();
+
 	for (int i = 0; i < dot.y; i++)
 	{
 		printf("\n");
