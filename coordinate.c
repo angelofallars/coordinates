@@ -12,20 +12,20 @@ void plot_point(point dot);
 
 int main(int argc, char* argv[])
 {
-	// Get x y coordinates and plot a point accordingly
+	// Control a point in a box, moving it around
 
 	point dot;
 	char key;
 
+	// Boundaries of the box
 	int min_x = 0;
 	int max_x = 10;
 	int min_y = 0;
 	int max_y = 10;
 
-	printf("Enter x coordinate: ");
-	scanf("%i", &dot.x);
-	printf("Enter y coordinate: ");
-	scanf("%i", &dot.y);
+	// Place the point in the middle of the box 
+	dot.x = (min_x + max_x) / 2;
+	dot.y = (min_y + max_y) / 2;
 	
 	// Plot the point	
 	plot_point(dot);
@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 	}
 	while (key != '.');
 
-	printf("\n");
+	clear();
 	return 0;
 }
 
