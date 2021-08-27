@@ -17,6 +17,11 @@ int main(int argc, char* argv[])
 	point dot;
 	char key;
 
+	int min_x = 0;
+	int max_x = 10;
+	int min_y = 0;
+	int max_y = 10;
+
 	printf("Enter x coordinate: ");
 	scanf("%i", &dot.x);
 	printf("Enter y coordinate: ");
@@ -37,17 +42,33 @@ int main(int argc, char* argv[])
 		switch(key)
 		{
 			case 'w' :
-				dot.y--;
+				if (dot.y > min_y)
+				{
+					dot.y--;
+				}
 				break;
+
 			case 'a' :
-				dot.x--;
+				if (dot.x > min_x)
+				{
+					dot.x--;
+				}
 				break;
+
 			case 's' :
-				dot.y++;
+				if (dot.y < max_x)
+				{
+					dot.y++;
+				}
 				break;
+
 			case 'd' :
-				dot.x++;
+				if (dot.x < max_x)
+				{
+					dot.x++;
+				}
 				break;
+
 			default :
 				break;
 		}		
