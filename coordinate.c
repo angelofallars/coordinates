@@ -8,11 +8,14 @@ typedef struct point {
 }
 point;
 
+void plot_point(point dot);
+
 int main(int argc, char* argv[])
 {
 	// Get x y coordinates and plot a point accordingly
 
 	point dot;
+	char key;
 
 	printf("Enter x coordinate: ");
 	scanf("%i", &dot.x);
@@ -20,6 +23,42 @@ int main(int argc, char* argv[])
 	scanf("%i", &dot.y);
 	
 	// Plot the point	
+	plot_point(dot);
+
+	// Ask the user for WASD controls to control the dot
+	while (1) 
+	{
+		printf("WASD: ");
+		scanf("%c", &key);
+
+		switch(key)
+		{
+			case 'w' :
+				dot.y--;
+				break;
+			case 'a' :
+				dot.x--;
+				break;
+			case 's' :
+				dot.y++;
+				break;
+			case 'd' :
+				dot.x++;
+				break;
+			default :
+				break;
+		}		
+
+		plot_point(dot);
+	}
+
+	return 0;
+}
+
+void plot_point(point dot)
+{
+	/* Plot a point, moving right as x increases and
+	                 moving down as y increases      */
 	clear();
 
 	for (int i = 0; i < dot.y; i++)
@@ -33,7 +72,8 @@ int main(int argc, char* argv[])
 	}
 
 	printf("#");
-
 	printf("\n");
-	return 0;
+
+	return;
 }
+
