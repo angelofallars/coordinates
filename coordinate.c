@@ -25,11 +25,14 @@ int main(int argc, char* argv[])
 	// Plot the point	
 	plot_point(dot);
 
+	// Go into RAW mode to avoid having to press enter
+	system ("/bin/stty raw");
+
 	// Ask the user for WASD controls to control the dot
 	while (1) 
 	{
-		printf("WASD: ");
-		scanf("%c", &key);
+		key = getchar();
+		putchar(key);
 
 		switch(key)
 		{
@@ -45,6 +48,9 @@ int main(int argc, char* argv[])
 			case 'd' :
 				dot.x++;
 				break;
+			case '.' :
+				printf("\n");
+				return 0; // Exit the program
 			default :
 				break;
 		}		
