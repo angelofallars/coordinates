@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 	system ("/bin/stty raw");
 
 	// Ask the user for WASD controls to control the dot
-	while (1) 
+	do 
 	{
 		key = getchar();
 		putchar(key);
@@ -48,16 +48,15 @@ int main(int argc, char* argv[])
 			case 'd' :
 				dot.x++;
 				break;
-			case '.' :
-				printf("\n");
-				return 0; // Exit the program
 			default :
 				break;
 		}		
 
 		plot_point(dot);
 	}
+	while (key != '.');
 
+	printf("\n");
 	return 0;
 }
 
