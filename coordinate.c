@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 
 	// Boundaries of the box
 	int min_x = 0;
-	int max_x = 10;
+	int max_x = 20;
 	int min_y = 0;
 	int max_y = 10;
 
@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
 				break;
 
 			case 's' :
-				if (dot.y < max_x)
+				if (dot.y < max_y)
 				{
 					dot.y++;
 				}
