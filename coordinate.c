@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define clear() printf("\033[H\033[J")
 
@@ -30,7 +31,7 @@ int main(int argc, char* argv[])
 	plot_point(dot);
 
 	// Go into RAW mode to avoid having to press enter
-	system ("/bin/stty raw");
+	system("/bin/stty raw");
 
 	// Ask the user for WASD controls to control the dot
 	do 
