@@ -12,32 +12,47 @@ typedef struct node {
 node;
 
 // Boundaries of the box
-int min_x = 0;
-int max_x = 20;
-int min_y = 0;
+int max_x = 10;
 int max_y = 10;
 
 void plot_point(node *dot);
-void render(char box[][max_x - min_x]);
+void render(char box[][max_x], node *dot);
 
 int main(int argc, char* argv[])
 {
 	// Control a point in a box, moving it around
 	node *dot = malloc(sizeof(node));
-	node *food;
+	node *food = malloc(sizeof(node));
+	node *food2 = malloc(sizeof(node));
 	char key;
 
 	// The display box
-	char box[max_x - min_x][max_y - min_y];
+	char box[max_x][max_y];
 
 	// Place the point in the middle of the box 
-	dot->x = (min_x + max_x) / 2;
-	dot->y = (min_y + max_y) / 2;
+	dot->x = (max_x) / 2;
+	dot->y = (max_y) / 2;
 	dot->symbol = '$';
 	dot->next = food;
+
+	food->x = 3;
+	food->y = 3;
+	food->symbol = '!';
+	food->next = food2;
+
+	food2->x = 1;
+	food2->y = 1;
+	food2->symbol = '@';
+	food2->next = NULL;
 	
 	// Plot the point	
-	plot_point(dot);
+	// plot_point(dot);
+
+	render(box, dot);
+
+	free(dot);
+	free(food);
+	return 0;
 
 	// Go into RAW mode to avoid having to press enter
 	system("/bin/stty raw");
@@ -51,14 +66,14 @@ int main(int argc, char* argv[])
 		switch(key)
 		{
 			case 'w' :
-				if (dot->y > min_y)
+				if (dot->y > 0)
 				{
 					dot->y--;
 				}
 				break;
 
 			case 'a' :
-				if (dot->x > min_x)
+				if (dot->x > 0)
 				{
 					dot->x--;
 				}
@@ -86,6 +101,8 @@ int main(int argc, char* argv[])
 	}
 	while (key != '.');
 
+	free(dot);
+	free(food);
 	clear();
 	return 0;
 }
@@ -96,7 +113,9 @@ void plot_point(node *dot)
 	                 moving down as y increases      */
 	clear();
 
-	for (int i = 0; i < dot->y; i++) { printf("\n");
+	for (int i = 0; i < dot->y; i++)
+	{ 
+		printf("\n");
 	}
 
 	for (int i = 0; i < dot->x; i++)
@@ -104,15 +123,45 @@ void plot_point(node *dot)
 		printf(" ");
 	}
 
-	printf("#");
+	printf("%c", dot->symbol);
 	printf("\n");
 
 	return;
 }
 
-void render(char box[][max_x - min_x])
+void render(char box[][max_x], node *dot)
 {
-		
+	clear();
 
+	/* Get a linked list chain, then display all of them*/
+	node *n = dot;
+
+	// Blank the box first
+	for (int i = 0; i < max_y; i++)
+	{
+		for (int j = 0; j < max_x; j++)
+		{
+			box[j][i] = '.';
+		}
+	}
+
+	// Iterate through the linked list and add them to the box
+	do
+	{
+		box[n->x][n->y] = n->symbol;	
+		n = n->next;
+	}
+	while (n != NULL);
+
+
+	// Iterate through the entire box, rendering everything
+	for (int i = 0; i < max_y; i++)
+	{
+		for (int j = 0; j < max_x; j++)
+		{
+			printf("%c", box[j][i]);
+		}
+		printf("\n");
+	}
 	return;
 }
