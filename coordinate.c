@@ -15,7 +15,6 @@ node;
 int max_x = 20;
 int max_y = 10;
 
-void plot_point(node *dot);
 void render(char box[][max_y], node *dot);
 void free_recursive(node *dot);
 
@@ -46,9 +45,6 @@ int main(int argc, char* argv[])
 	food2->symbol = '@';
 	food2->next = NULL;
 	
-	// Plot the point	
-	// plot_point(dot);
-
 	render(box, dot);
 
 	// Go into RAW mode to avoid having to press enter
@@ -101,28 +97,6 @@ int main(int argc, char* argv[])
 	free_recursive(dot);
 	clear();
 	return 0;
-}
-
-void plot_point(node *dot)
-{
-	/* Plot a point, moving right as x increases and
-	                 moving down as y increases      */
-	clear();
-
-	for (int i = 0; i < dot->y; i++)
-	{ 
-		printf("\n");
-	}
-
-	for (int i = 0; i < dot->x; i++)
-	{
-		printf(" ");
-	}
-
-	printf("%c", dot->symbol);
-	printf("\n");
-
-	return;
 }
 
 void render(char box[][max_y], node *dot)
