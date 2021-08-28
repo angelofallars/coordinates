@@ -3,37 +3,38 @@
 
 #define clear() printf("\033[H\033[J")
 
-typedef struct point {
-	int x;
-	int y;
-}
-point;
-
 typedef struct node {
 	int x;
 	int y;
+	char symbol;
 	struct node *next;
 }
 node;
 
-void plot_point(point dot);
-void render(node dot);
+// Boundaries of the box
+int min_x = 0;
+int max_x = 20;
+int min_y = 0;
+int max_y = 10;
+
+void plot_point(node *dot);
+void render(char box[][max_x - min_x]);
 
 int main(int argc, char* argv[])
 {
 	// Control a point in a box, moving it around
-	point dot;
+	node *dot = malloc(sizeof(node));
+	node *food;
 	char key;
 
-	// Boundaries of the box
-	int min_x = 0;
-	int max_x = 20;
-	int min_y = 0;
-	int max_y = 10;
+	// The display box
+	char box[max_x - min_x][max_y - min_y];
 
 	// Place the point in the middle of the box 
-	dot.x = (min_x + max_x) / 2;
-	dot.y = (min_y + max_y) / 2;
+	dot->x = (min_x + max_x) / 2;
+	dot->y = (min_y + max_y) / 2;
+	dot->symbol = '$';
+	dot->next = food;
 	
 	// Plot the point	
 	plot_point(dot);
@@ -50,30 +51,30 @@ int main(int argc, char* argv[])
 		switch(key)
 		{
 			case 'w' :
-				if (dot.y > min_y)
+				if (dot->y > min_y)
 				{
-					dot.y--;
+					dot->y--;
 				}
 				break;
 
 			case 'a' :
-				if (dot.x > min_x)
+				if (dot->x > min_x)
 				{
-					dot.x--;
+					dot->x--;
 				}
 				break;
 
 			case 's' :
-				if (dot.y < max_y)
+				if (dot->y < max_y)
 				{
-					dot.y++;
+					dot->y++;
 				}
 				break;
 
 			case 'd' :
-				if (dot.x < max_x)
+				if (dot->x < max_x)
 				{
-					dot.x++;
+					dot->x++;
 				}
 				break;
 
@@ -89,18 +90,16 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-void plot_point(point dot)
+void plot_point(node *dot)
 {
 	/* Plot a point, moving right as x increases and
 	                 moving down as y increases      */
 	clear();
 
-	for (int i = 0; i < dot.y; i++)
-	{
-		printf("\n");
+	for (int i = 0; i < dot->y; i++) { printf("\n");
 	}
 
-	for (int i = 0; i < dot.x; i++)
+	for (int i = 0; i < dot->x; i++)
 	{
 		printf(" ");
 	}
@@ -111,7 +110,7 @@ void plot_point(point dot)
 	return;
 }
 
-void render(node dot)
+void render(char box[][max_x - min_x])
 {
 		
 
