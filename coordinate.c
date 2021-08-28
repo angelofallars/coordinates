@@ -50,12 +50,8 @@ int main(int argc, char* argv[])
 
 	render(box, dot);
 
-	free(dot);
-	free(food);
-	return 0;
-
 	// Go into RAW mode to avoid having to press enter
-	system("/bin/stty raw");
+	// system("/bin/stty raw");
 
 	// Ask the user for WASD controls to control the dot
 	do 
@@ -80,14 +76,14 @@ int main(int argc, char* argv[])
 				break;
 
 			case 's' :
-				if (dot->y < max_y)
+				if (dot->y < max_y - 1)
 				{
 					dot->y++;
 				}
 				break;
 
 			case 'd' :
-				if (dot->x < max_x)
+				if (dot->x < max_x - 1)
 				{
 					dot->x++;
 				}
@@ -97,12 +93,13 @@ int main(int argc, char* argv[])
 				break;
 		}		
 
-		plot_point(dot);
+		render(box, dot);
 	}
 	while (key != '.');
 
 	free(dot);
 	free(food);
+	free(food2);
 	clear();
 	return 0;
 }
