@@ -12,11 +12,12 @@ typedef struct node {
 node;
 
 // Boundaries of the box
-int max_x = 10;
+int max_x = 20;
 int max_y = 10;
 
 void plot_point(node *dot);
-void render(char box[][max_x], node *dot);
+void render(char box[][max_y], node *dot);
+void free_recursive(node *dot);
 
 int main(int argc, char* argv[])
 {
@@ -97,9 +98,7 @@ int main(int argc, char* argv[])
 	}
 	while (key != '.');
 
-	free(dot);
-	free(food);
-	free(food2);
+	free_recursive(dot);
 	clear();
 	return 0;
 }
@@ -126,7 +125,7 @@ void plot_point(node *dot)
 	return;
 }
 
-void render(char box[][max_x], node *dot)
+void render(char box[][max_y], node *dot)
 {
 	clear();
 
@@ -160,5 +159,19 @@ void render(char box[][max_x], node *dot)
 		}
 		printf("\n");
 	}
+	return;
+}
+
+void free_recursive(node *dot)
+{
+	// Recursively free a linked list with just the head
+	if (dot->next == NULL)
+	{
+		free(dot);
+		return;
+	}
+
+	free_recursive(dot->next);
+	free(dot);
 	return;
 }
