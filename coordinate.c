@@ -9,6 +9,13 @@ typedef struct point {
 }
 point;
 
+typedef struct node {
+	int x;
+	int y;
+	char* next;
+}
+node;
+
 void plot_point(point dot);
 
 int main(int argc, char* argv[])
