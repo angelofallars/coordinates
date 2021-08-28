@@ -13,7 +13,6 @@ void plot_point(point dot);
 int main(int argc, char* argv[])
 {
 	// Control a point in a box, moving it around
-
 	point dot;
 	char key;
 
