@@ -37,11 +37,13 @@ int main(int argc, char* argv[])
 	dot->symbol = '$';
 	dot->next = food;
 
+	// First food
 	food->x = 3;
 	food->y = 3;
 	food->symbol = '!';
 	food->next = food2;
 
+	// Second food
 	food2->x = 1;
 	food2->y = 1;
 	food2->symbol = '@';
