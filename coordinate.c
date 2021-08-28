@@ -12,11 +12,12 @@ point;
 typedef struct node {
 	int x;
 	int y;
-	char* next;
+	struct node *next;
 }
 node;
 
 void plot_point(point dot);
+void render(node dot);
 
 int main(int argc, char* argv[])
 {
@@ -110,3 +111,9 @@ void plot_point(point dot)
 	return;
 }
 
+void render(node dot)
+{
+		
+
+	return;
+}
