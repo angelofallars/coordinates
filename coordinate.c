@@ -24,6 +24,8 @@ int main(int argc, char* argv[])
 	node *dot = malloc(sizeof(node));
 	node *food = malloc(sizeof(node));
 	node *food2 = malloc(sizeof(node));
+
+	int score = 0;
 	char key;
 
 	// The display box
@@ -44,8 +46,10 @@ int main(int argc, char* argv[])
 	food2->y = 1;
 	food2->symbol = '@';
 	food2->next = NULL;
-	
+
 	render(box, dot);
+	printf("Score: %i\n", score);
+	printf("wasd to move! Press . to exit!\n");
 
 	// Go into RAW mode to avoid having to press enter
 	// system("/bin/stty raw");
@@ -91,6 +95,7 @@ int main(int argc, char* argv[])
 		}		
 
 		render(box, dot);
+		printf("Score: %i\n", score);
 	}
 	while (key != '.');
 
