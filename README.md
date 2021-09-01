@@ -4,6 +4,8 @@ A terminal program in C, allowing you to control a point in the command line wit
 
 ### Installation
 
----
-
 Compile `coordinate.c` with GCC or Clang. Possibly only compatible with Unix-based systems.
+
+### License
+
+MIT
