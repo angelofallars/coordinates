@@ -30,18 +30,18 @@ int main(int argc, char* argv[])
 	int min_y = 0;
 	int max_y = 10;
 
-	// Place the point in the middle of the box 
+	// Place the point in the middle of the box
 	dot.x = (min_x + max_x) / 2;
 	dot.y = (min_y + max_y) / 2;
-	
-	// Plot the point	
+
+	// Plot the point
 	plot_point(dot);
 
 	// Go into RAW mode to avoid having to press enter
 	system("/bin/stty raw");
 
 	// Ask the user for WASD controls to control the dot
-	do 
+	do
 	{
 		key = getchar();
 		putchar(key);
@@ -76,9 +76,13 @@ int main(int argc, char* argv[])
 				}
 				break;
 
+			case 'q' :
+				exit(0);
+				break;
+
 			default :
 				break;
-		}		
+		}
 
 		plot_point(dot);
 	}
@@ -93,6 +97,7 @@ void plot_point(point dot)
 	/* Plot a point, moving right as x increases and
 	                 moving down as y increases      */
 	clear();
+	printf("Use WASD to move the point. Press Q or . to quit\n");
 
 	for (int i = 0; i < dot.y; i++)
 	{
@@ -107,6 +112,5 @@ void plot_point(point dot)
 	printf("#");
 	printf("\n");
 
-	return;
 }
 
